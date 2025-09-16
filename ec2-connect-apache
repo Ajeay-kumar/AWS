@@ -1,0 +1,54 @@
+####################
+# 16/9/2025
+# Ajeay kumar 
+####################
+
+#Create an AWS ec2 instance using console
+
+#1) Choose an Instance Type: Select "t2.micro" This is free-tier eligible.
+
+#2) Configure instance details:
+#	*Network: Create a vpc or select default vpc
+#	*Auto-assign public IP: Ensure this is "Enable"
+
+#3) Configure security group: This is crucial
+#	*Create a new security group.
+#	*Add rules:
+#		SSH: TYPE:SSH, Source:Myip
+#		HTTP: TYPE:HTTP, Source: Anywhere(0.0.0.0/0)
+#		HTTPS: TYPE:HTTPS, Source: Anywhere(0.0.0.0/0)
+
+#4) Create keypair:
+#	*Create a keypair and Name it
+#	*Download the keypair (.pem) file
+#       *Launch Insatance
+
+####### Connect to your EC2 Instance ####
+
+# Linux Users
+#	*Open terminal and navigate to .pem file location 
+#	*Change the file permissions 
+		*chmod 400 keypairname.pem
+# TO CONNECT:
+	*ssh -i keypair.pem ec2-user@public-ip-address-of-your-instance 
+
+#After connecting to ec2, Now downlaod a web Server(APACHE):
+	* sudo yum update -y
+	
+	* sudo yum install -y httpd
+
+	* sudo systemctl start httpd
+
+	* sudo systemctl enable httpd
+
+#Now create a example HTML page:
+
+	* sudo nano /var/www/html/index.html
+	
+	Now write an example html code in index.html and save 
+
+#Verify your Web server	now
+	
+#	Open browser and Enter instance public ip into address bar
+#	You will see your "html page content"
+
